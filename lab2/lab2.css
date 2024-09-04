@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+fieldset {
+    border: 0;
+    padding: 0.01em 0 0 0;
+    margin: 0;
+    min-width: 0;
+   
+}
+
+
+
+a, a:visited {
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub-title {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: underline;
+    color: black;
+    font-weight: 500;
+}
+
+.wrapper {
+    width: 90%;
+    border: 2px solid #a2cbbc;
+    display: flex;
+    flex-direction: column;
+
+}
+
+nav {
+   background-color: #a2cbbc;
+   height: 40px;
+   padding-inline: 10px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+li {
+   list-style: none;
+}
+
+.content {
+    padding-inline: 10px;
+}
+
+.form {
+    font-weight: 600;
+}
+
+.left-section, .right-section {
+    width: 48%;
+}
+
+.content div  {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+}
+.left-section input, .left-section  select, .right-section input, .right-section  select{
+    width: 220px;
+    height: 23px;
+}
+
+
+.left-section textarea {
+    width: 220px;
+    height: 110px;
+    display: block;
+}
+
+
+.required-star{
+    color: rgba(255, 0, 0, .5);
+}
+
+fieldset div {
+    display: block;
+}
+
+.payment input {
+    display: block;
+}
+
+footer {
+    text-align: center;
+    padding: 8px;
+    background-color: rgb(231, 231, 231);
+    margin-top: 20px;
+}
+
+footer input, footer button{
+    height: 25px;
+    width: 100px;
+    border: none;
+    background-color: #a2cbbc;
+}
+
+footer+p{
+    text-align: center;
+}
+
+
+/* Utilities */
+.flex {
+    display: flex;
+}
+
+.sb{
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+

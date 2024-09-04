@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./lab2.css">
+    <title>Lab 2</title>
+</head>
+
+<body>
+
+    <main class="main">
+        <div class="wrapper ">
+            <nav class="flex">
+                <ul class="flex align-center">
+                    <li class="title">Workshop Registration</li>
+                    <li>More Actions </li>
+                </ul>
+            </nav>
+            <div class="content">
+                <div class="sub-title">Register now while seats are available !</div>
+                <form class="flex sb form">
+                    <section class="left-section">
+                        <div>
+                            <label for="firstname"> Firstname<span class="required-star">*</span></label>
+                            <input type="text" name="firstname" id="firstname">
+                        </div>
+
+                        <div>
+                            <label for="lastname">Last Name<span class="required-star">*</span></label>
+                            <input type="text" name="lastname" id="lastname">
+                        </div>
+
+                        <div>
+                            <label for="company">Company/Institution<span class="required-star">*</span></label>
+                            <input type="text" name="company" id="company">
+                        </div>
+
+                        <div>
+                            <label for="address">Address<span class="required-star">*</span></label>
+                            <textarea name="address" id="address"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="city">City</label>
+                            <input type="text" name="city" id="city">
+                        </div>
+
+                        <div>
+                            <label for="state">State/Province/Region </label>
+                            <select name="state" id="state">
+                                <option value="">-Select-</option>
+                                <option value="state1">state 1</option>
+                                <option value="state2">state 2</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="country">Country : </label>
+                            <select name="country" id="country">
+                                <option value="">-Select-</option>
+                                <option value="country1">country 1</option>
+                                <option value="country2">country 2</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="email">Email <span class="required-star">*</span></label>
+                            <input type="email" name="email" id="email">
+                        </div>
+
+                        <div>
+                            <label for="phone-number">Phone Number <span class="required-star">*</span> </label>
+                            <input type="number" name="phone-number" id="phone-number">
+                        </div>
+                    </section>
+                    <section class="right-section">
+                        <div class="sub-title">Lunch</div>
+                        <div>
+                            <label for="meal">Meal Preferences</label>
+                            <select name="meal" id="meal">
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="carnivore">Carnivore</option>
+                            </select>
+                        </div>
+                        <div class="sub-title">Payment Details</div>
+                        <fieldset>
+                            <legend>Payment Mode</legend>
+                            <div class="payment">
+                                <label for="cash">Cash</label>
+                                <input name="payment" id="cash" type="checkbox">
+                            </div>
+
+                            <div>
+                                <label for="cheque">Cheque</label>
+                                <input type="checkbox" name="payment" id="cheque">
+                            </div>
+                            <div>
+                                <label for="draft">Demande Draft</label>
+                                <input type="checkbox" name="payment" id="draft">
+                            </div>
+
+                            <div>
+                                <label for="city">DD/Cheque No </label>
+                                <input type="text" name="city" id="city">
+                            </div>
+                            <div>
+                                <label for="banque">Drawn on Banque </label>
+                                <input type="text" name="banque" id="banque">
+                            </div>
+
+                            <div>
+                                <label for="payable">Payable at</label>
+                                <input type="text" name="payable" id="payable">
+                            </div>
+
+                        </fieldset>
+                    </section>
+                </form>
+                <footer>
+                    <button>Submit</button>
+                    <input type="reset">
+                </footer>
+                <p> <a
+                        href="https://validator.w3.org/nu/?doc=https%3A%2F%2Felioccansey.github.io%2Fwap_labs%2Flab1%2Findex.html"><img
+                            src="./css_checker.png" width="100" alt="CSS Checker Logo"></a></p>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>
