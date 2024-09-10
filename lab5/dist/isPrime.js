@@ -8,28 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const isPrime = (n) => __awaiter(void 0, void 0, void 0, function* () {
-    if (n <= 1)
-        return ({ prime: false });
-    for (let i = 2, s = Math.sqrt(n); i <= s; i++)
-        if (n % i === 0)
-            return { prime: false };
-    return ({ prime: true });
-    ;
-    // return new Promise((resolve) => {
-    //     if (n <= 1) {
-    //         resolve({ prime: false });
-    //         return;
-    //     }
-    //     for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
-    //         if (n % i === 0) {
-    //             resolve({ prime: false });
-    //             return;
-    //         }
-    //     }
-    //     resolve({ prime: true });
-    // });
-});
+const isPrime = (n) => {
+    // if (n <= 1) return ({ prime: false });
+    // for (let i = 2, s = Math.sqrt(n); i <= s; i++) 
+    //     if (n % i === 0) throw new Error(JSON.stringify({ prime: false }))
+    // return ({ prime: true });
+    return new Promise((resolve, reject) => {
+        if (n <= 1) {
+            reject({ prime: false });
+            return;
+        }
+        for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
+            if (n % i === 0) {
+                reject({ prime: false });
+                return;
+            }
+        }
+        resolve({ prime: true });
+    });
+};
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log('start');
@@ -37,6 +34,7 @@ const isPrime = (n) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(result);
     }
     catch (error) {
+        // const er = error as Error
         console.error(error);
     }
     finally {
