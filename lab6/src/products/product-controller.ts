@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Product from "./product";
+import { BadRequestError } from "./bad-request-error";
 
 export function handleSave(req:Request, res:Response){
     const {id,price, description, title} = req.body;
@@ -23,29 +24,23 @@ export function handleFetchAll(req:Request, res:Response){
 export function handleFindById(req:Request, res:Response){
     const id = parseInt(req.params.id)
     if(isNaN(id)){
-        res.status(404).json({message:"Invalid ID"})
+        // res.status(404).json({message:"Invalid ID"})
+        throw new BadRequestError("Invalid ID")
     }
     let product :Product
-    try {
-       product = Product.findById(id)
-       res.status(200).json(product)
-    }catch(error){
-        const er = error as Error
-        res.status(404).json({message:er.message})
-    }
+    product = Product.findById(id)
+    res.status(200).json(product)
+   
 }
 
 export function handleDeleteById(req:Request, res:Response){
     const id = parseInt(req.params.id)
     if(isNaN(id)){
-        res.status(404).json({message:"Invalid ID"})
+        // res.status(404).json({message:"Invalid ID"})
+        throw new BadRequestError("Invalid ID")
+
     }
-    try{
-        Product.deleteById(id)
-        res.status(200).json({message: "Product deleted successfully !"})
-    }catch(error){
-        const er = error as Error
-        res.status(404).json({message: er.message})
-    }
+    Product.deleteById(id)
+    res.status(200).json({message: "Product deleted successfully !"})
 }
 
