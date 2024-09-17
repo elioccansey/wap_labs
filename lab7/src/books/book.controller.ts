@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { Book } from "./book"
 import { Author } from "../author/author"
+import path from "path"
 
 const saveBook = (req: Request, res: Response,) => {
     const { id, title, isbn, publishedDate, author } = req.body
@@ -17,7 +18,12 @@ const getBookById = (req: Request, res: Response) => {
     res.status(200).json(Book.findById(id))
 }
 
+const listAllBooks = (req: Request, res: Response) => {
+    const clientPath = path.join(__dirname, "..", "..", "client.html")
+    res.sendFile(clientPath)
+}
+
 
 export {
-    saveBook, getAllBooks, getBookById
+    saveBook, getAllBooks, getBookById, listAllBooks
 }

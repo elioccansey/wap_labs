@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+</head>
+
+<body>
+
+    <button id="add-post">Add Post</button>
+
+
+    <script>
+        const BASE_URL = "http://localhost:3000/books"
+        fetch(BASE_URL)
+            .then(res => res.json())
+            .then(books => console.log(books))
+
+        document.getElementById("add-post")
+            .addEventListener("click", (e) => {
+                fetch(BASE_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        id: "pid",
+                        title: "title",
+                        isbn: "the isbn",
+                        publishedDate: "2021-12-14",
+                        author: {
+                            id: "11",
+                            name: "author name"
+                        }
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+            })
+    </script>
+</body>
+
+</html>
