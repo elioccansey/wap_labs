@@ -1,4 +1,4 @@
-import { Author } from "../Author";
+import { Author } from "../author/author";
 
 const books: Book[] = []
 export class Book {

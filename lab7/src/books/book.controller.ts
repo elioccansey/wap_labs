@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { Book } from "./book"
-import { Author } from "../Author"
+import { Author } from "../author/author"
 
 const saveBook = (req: Request, res: Response,) => {
     const { id, title, isbn, publishedDate, author } = req.body

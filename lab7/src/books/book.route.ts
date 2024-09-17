@@ -1,5 +1,9 @@
 import express from "express"
+import { getAllBooks, saveBook } from "./book.controller"
 
-const app = express()
-app.route("/")
-    .get()
+export const bookRoutes = express.Router()
+
+bookRoutes.get("/", getAllBooks)
+bookRoutes.post("/", saveBook)
+
+

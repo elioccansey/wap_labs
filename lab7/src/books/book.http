@@ -1,0 +1,17 @@
+GET http://localhost:3000/books
+
+###
+
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+        "id":"" ,
+        "title":"" ,
+        "isbn":"" ,
+        "publishedDate":"2021-12-14",
+        "author":{
+            "id":"11",
+            "name": "author name"
+        }
+}
