@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { Book } from "./book"
-import { Author } from "../author/author"
+import { Author } from "../authors/author"
 import path from "path"
 
 const saveBook = (req: Request, res: Response,) => {
