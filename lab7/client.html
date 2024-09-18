@@ -15,7 +15,11 @@
     <script>
         const BASE_URL = "http://localhost:3000/books"
         fetch(BASE_URL)
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+            })
             .then(books => console.log(books))
 
         document.getElementById("add-post")
