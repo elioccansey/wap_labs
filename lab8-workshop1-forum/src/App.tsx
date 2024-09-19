@@ -13,15 +13,21 @@ const App = () => {
   const commentRef = useRef<HTMLTextAreaElement>(null)
 
   const handleAddNewComment = (commentContent:string)=> {
-    let newComment:ChatComment= {
-      content:commentContent,
-      ctime:new Date().toUTCString(),
-      like:0,
-      rpid:comments.length+1,
-      user:user
+
+    if(commentRef.current){
+      let newComment:ChatComment= {
+        content:commentContent,
+        ctime:new Date().toUTCString(),
+        like:0,
+        rpid:comments.length+1,
+        user:user
+      }
+      setComments([...comments, newComment ])
+      commentRef.current.value = ""
+      commentRef.current.focus()
+      
     }
-    setComments([...comments, newComment ])
-  }
+    }
 
   const handleDeleteCommentById = (commentId:number)=> setComments(comments.filter(c => c.rpid !== commentId))
 
@@ -75,10 +81,10 @@ const App = () => {
               placeholder="tell something..."
             />
             {/* post button */}
-            <div className="reply-box-send">
-              <div className="send-text" onClick={()=>{
-                commentRef.current?.value && handleAddNewComment(commentRef.current?.value)
-              }}>post</div>
+            <div className="reply-box-send" onClick={()=>{
+                commentRef.current?.value && handleAddNewComment(commentRef.current?.value);
+              }}>
+              <div className="send-text">post</div>
             </div>
           </div>
         </div>
