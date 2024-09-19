@@ -1,37 +1,44 @@
 import './App.scss'
 import avatar from './images/bozai.png'
-import {initilaComments, user, tabs as initialTab} from './data/initial-data'
-import { useRef, useState } from 'react'
-import { ChatComment, SortTabItem } from './types'
+import { initilaComments, user, tabs as initialTab } from './data/initial-data'
+import { useEffect, useRef, useState } from 'react'
+import { ChatCommentType, SortTabItem } from './types'
+import useFetch from "./hooks/useFetch"
+import ChatComment from './components/chat-comment'
 
-
+const DEFAULT_URL = "http://localhost:3004/comments"
 
 const App = () => {
-  const [comments, setComments] = useState<ChatComment[]>(initilaComments)
+  const [comments, setComments] = useState<ChatCommentType[]>(initilaComments)
   const [tabs, setTab] = useState(initialTab)
   const [activeTab, setActiveTab] = useState(tabs[0]);
-  const commentRef = useRef<HTMLTextAreaElement>(null)
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+  const [url, setUrl] = useState(DEFAULT_URL)
+  const { isError, isLoading, isSuccess, data } = useFetch(url)
 
-  const handleAddNewComment = (commentContent:string)=> {
+  useEffect(() => {
+    if (isSuccess) setComments(data)
+  }, [])
 
-    if(commentRef.current){
-      let newComment:ChatComment= {
-        content:commentContent,
-        ctime:new Date().toUTCString(),
-        like:0,
-        rpid:comments.length+1,
-        user:user
+  const handleAddNewComment = (commentContent: string) => {
+    if (commentRef.current) {
+      let newComment: ChatCommentType = {
+        content: commentContent,
+        ctime: new Date().toUTCString(),
+        like: 0,
+        rpid: comments.length + 1,
+        user: user
       }
-      setComments([...comments, newComment ])
+      setComments([...comments, newComment])
       commentRef.current.value = ""
       commentRef.current.focus()
-      
-    }
-    }
 
-  const handleDeleteCommentById = (commentId:number)=> setComments(comments.filter(c => c.rpid !== commentId))
+    }
+  }
 
-  const handleSort = (sortTab:SortTabItem)=> {
+  const handleDeleteCommentById = (commentId: number) => setComments(comments.filter(c => c.rpid !== commentId))
+
+  const handleSort = (sortTab: SortTabItem) => {
     // let sortBy;
     // if(sortTab.text === 'Top'){
     //   sortBy = 'ctime'
@@ -52,93 +59,61 @@ const App = () => {
           </li>
           <li className="nav-sort">
             {/* highlight class name： active */}
-            {tabs.map( (tab, ind) => (
-              <span 
-              key={ind} 
-              className={`nav-item ${activeTab.text === tab.text ? "active" : " "}`} 
-              onClick={()=> {
-                setActiveTab(tab)
-                handleSort(tab)
-              }}
+            {tabs.map((tab, ind) => (
+              <span
+                key={ind}
+                className={`nav-item ${activeTab.text === tab.text ? "active" : " "}`}
+                onClick={() => {
+                  setActiveTab(tab)
+                  handleSort(tab)
+                }}
               >{tab.text}</span>))}
           </li>
         </ul>
       </div>
 
-      <div className="reply-wrap">
-        {/* comments */}
-        <div className="box-normal">
-          {/* current logged in user profile */}
-          <div className="reply-box-avatar">
-            <div className="bili-avatar">
-              <img className="bili-avatar-img" src={avatar} alt="Profile" />
+      {isError && <p>Something went wrong!</p>}
+      {isLoading && <p>Loading...</p>}
+      {
+        !isLoading && data.length > 0 &&
+        <div className="reply-wrap">
+          {/* comments */}
+          <div className="box-normal">
+            {/* current logged in user profile */}
+            <div className="reply-box-avatar">
+              <div className="bili-avatar">
+                <img className="bili-avatar-img" src={avatar} alt="Profile" />
+              </div>
             </div>
-          </div>
-          <div className="reply-box-wrap">
-            {/* comment */}
-            <textarea ref={commentRef}
-              className="reply-box-textarea"
-              placeholder="tell something..."
-            />
-            {/* post button */}
-            <div className="reply-box-send" onClick={()=>{
+            <div className="reply-box-wrap">
+              {/* comment */}
+              <textarea ref={commentRef}
+                className="reply-box-textarea"
+                placeholder="tell something..."
+              />
+              {/* post button */}
+              <div className="reply-box-send" onClick={() => {
                 commentRef.current?.value && handleAddNewComment(commentRef.current?.value);
               }}>
-              <div className="send-text">post</div>
+                <div className="send-text">post</div>
+              </div>
             </div>
           </div>
+          {/* comment list */}
+          <div className="reply-list">
+            {/* comment item */}
+
+            {
+              comments.map(comment => (
+                <ChatComment comment={comment} handleDeleteCommentById={handleDeleteCommentById} user={user} key={comment.rpid} />)
+              )
+            }
+
+
+          </div>
         </div>
-        {/* comment list */}
-        <div className="reply-list">
-          {/* comment item */}
+      }
 
-
-          {
-            comments.map(comment => {
-              return <div key={comment.rpid} className="reply-item">
-              {/* profile */}
-              <div className="root-reply-avatar">
-                <div className="bili-avatar">
-                  <img
-                    className="bili-avatar-img"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="content-wrap">
-                {/* username */}
-                <div className="user-info">
-                  <div className="user-name"> {comment.user.uname} </div>
-                </div>
-                {/* comment content */}
-                <div className="root-reply">
-                  <span className="reply-content"> {comment.content} </span>
-                  <div className="reply-info">
-                    {/* comment created time */}
-                    <span className="reply-time">{comment.ctime}</span>
-                    {/* total likes */}
-                    <span className="reply-time">Like:{comment.like}</span>
-                    
-                    {
-                      comment.user.uid === user.uid ? <span className="delete-btn" onClick={()=>handleDeleteCommentById(comment.rpid)}>
-                      Delete
-                    </span> : null
-                    }
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            })
-          }
-
-          
-
-
-        </div>
-      </div>
     </div>
   )
 }

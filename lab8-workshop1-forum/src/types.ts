@@ -4,7 +4,7 @@ export type User = {
     uname: string;
 }
 
-export type ChatComment = {
+export type ChatCommentType = {
     rpid: number;
     user: User;
     content: string;
