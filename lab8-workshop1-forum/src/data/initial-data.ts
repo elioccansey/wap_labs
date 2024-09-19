@@ -1,6 +1,6 @@
-import { ChatComment, SortTabItem, User } from "../types"
+import { ChatCommentType, SortTabItem, User } from "../types"
 
-export const initilaComments: ChatComment[] = [
+export const initilaComments: ChatCommentType[] = [
     {
         // comment id
         rpid: 3,
