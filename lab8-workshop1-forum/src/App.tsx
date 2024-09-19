@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ChatCommentType, SortTabItem } from './types'
 import useFetch from "./hooks/useFetch"
 import ChatComment from './components/chat-comment'
+import _ from 'lodash'
 
 const DEFAULT_URL = "http://localhost:3004/comments"
 
@@ -38,14 +39,8 @@ const App = () => {
 
   const handleDeleteCommentById = (commentId: number) => setComments(comments.filter(c => c.rpid !== commentId))
 
-  const handleSort = (sortTab: SortTabItem) => {
-    // let sortBy;
-    // if(sortTab.text === 'Top'){
-    //   sortBy = 'ctime'
-    //   sortBy = 'like'
-    // }
+  const sortedComments = _.orderBy(comments, [activeTab.type === "hot" ? "like" : "ctime"], ["desc"])
 
-  }
 
   return (
     <div className="app">
@@ -55,7 +50,7 @@ const App = () => {
           <li className="nav-title">
             <span className="nav-title-text">Comments</span>
             {/* Like */}
-            <span className="total-reply">{comments.length}</span>
+            <span className="total-reply">{sortedComments.length}</span>
           </li>
           <li className="nav-sort">
             {/* highlight class name： active */}
@@ -65,7 +60,6 @@ const App = () => {
                 className={`nav-item ${activeTab.text === tab.text ? "active" : " "}`}
                 onClick={() => {
                   setActiveTab(tab)
-                  handleSort(tab)
                 }}
               >{tab.text}</span>))}
           </li>
@@ -104,7 +98,7 @@ const App = () => {
             {/* comment item */}
 
             {
-              comments.map(comment => (
+              sortedComments.map(comment => (
                 <ChatComment comment={comment} handleDeleteCommentById={handleDeleteCommentById} user={user} key={comment.rpid} />)
               )
             }

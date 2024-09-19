@@ -14,7 +14,7 @@ export const initilaComments: ChatCommentType[] = [
         content: 'Nice, well done',
         // created datetime
         ctime: '10-18 08:15',
-        like: 88,
+        like: 21,
     },
     {
         rpid: 2,
